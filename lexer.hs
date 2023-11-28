@@ -7,11 +7,13 @@ getFileContents fileName =
         let seperated = lines contents
         return seperated
        
-lexFile contents = map (\x -> lexLine x) contents
+lexFile contents = map (\x -> removeWhiteSpace x) contents
+
+removeWhiteSpace line = lexLine(foldr (\x acc -> if x == ' ' then acc else x) "" line)
 
 lexLine line = map (\x -> tokenType x) line -- goes char by char 
 
-tokenType token = 
+tokenType token 
     | token == '=' = "TOKEN_EQUALS"
     | token == '!' = "TOKEN_EXMARK"
     | token == '(' = "TOKEN_LPAREN"
@@ -28,7 +30,6 @@ tokenType token =
     | token == ';' = "TOKEN_SEMI"
     | token == '<' = "TOKEN_LT"
     | token == '>' = "TOKEN_GT"
-    | token == '"' = "TOKEN_DOUBLEQ"
-    | token == ''' = "TOKEN_SINGLE"
+    | otherwise = "TOKEN_OTHER"
     
 
