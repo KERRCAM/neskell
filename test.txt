@@ -1,5 +1,5 @@
-var n1 = 34
-var n2 = 14 
+int n1 = 34
+int n2 = 14
 print (n1 - n2)
 ;
 []
